@@ -1,0 +1,846 @@
+:root {
+  --ink: #182326;
+  --muted: #607074;
+  --line: #dce4e3;
+  --panel: #ffffff;
+  --page: #f5f7f4;
+  --teal: #0f9b8e;
+  --teal-dark: #08766d;
+  --coral: #ee6f61;
+  --sun: #f4bf3a;
+  --navy: #193142;
+  --soft-teal: #e4f5f2;
+  --soft-coral: #fff0ed;
+  --shadow: 0 18px 50px rgba(25, 49, 66, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--page);
+  color: var(--ink);
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+button,
+select,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.auth-screen {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(360px, 0.8fr);
+  min-height: 100vh;
+  background: #fbfcfa;
+}
+
+.auth-visual {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.auth-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.auth-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 22px;
+  padding: 44px;
+  border-left: 1px solid var(--line);
+  background: #fff;
+}
+
+.auth-tabs,
+.role-tabs,
+.segmented-control {
+  display: inline-grid;
+  grid-auto-flow: column;
+  gap: 6px;
+  width: fit-content;
+  max-width: 100%;
+  padding: 5px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f7faf8;
+}
+
+.auth-tab,
+.role-tab,
+.segmented-control button {
+  min-height: 34px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  padding: 0 12px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.auth-tab.active,
+.role-tab.active,
+.segmented-control button.active {
+  background: #fff;
+  color: var(--teal-dark);
+  box-shadow: 0 6px 16px rgba(25, 49, 66, 0.08);
+}
+
+.auth-form,
+.settings-panel,
+.profile-editor,
+.editor-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.demo-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+label {
+  display: grid;
+  gap: 7px;
+  color: var(--ink);
+  font-weight: 750;
+}
+
+label span,
+.form-message {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  padding: 10px 12px;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #8fd8ce;
+  box-shadow: 0 0 0 3px rgba(15, 155, 142, 0.13);
+}
+
+.form-message {
+  min-height: 18px;
+  margin: 0;
+  color: #a8332c;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px 20px;
+  background: #fbfcfa;
+  border-right: 1px solid var(--line);
+}
+
+.brand,
+.profile-compact,
+.applicant-top,
+.profile-preview-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark,
+.avatar,
+.company-mark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  background-color: var(--navy);
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.large-avatar {
+  width: 68px;
+  height: 68px;
+  font-size: 18px;
+}
+
+.brand strong,
+.profile-compact strong {
+  display: block;
+}
+
+.brand span,
+.profile-compact span,
+.side-stat-grid span,
+.match-button span,
+.detail-grid span,
+.score-card span,
+.document-row span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.mode-switch {
+  display: grid;
+  gap: 8px;
+}
+
+.mode-button {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  padding: 0 12px;
+  text-align: left;
+  font-weight: 750;
+}
+
+.mode-button.active,
+.mode-button:hover {
+  background: var(--soft-teal);
+  border-color: #bee4de;
+  color: var(--teal-dark);
+}
+
+.profile-compact {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.avatar {
+  background-color: var(--coral);
+}
+
+.side-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.side-stat-grid div {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.side-stat-grid strong {
+  display: block;
+  font-size: 22px;
+}
+
+.workspace {
+  min-width: 0;
+  padding: 24px;
+}
+
+.visual-band {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(240px, 0.95fr) minmax(320px, 1.35fr);
+  align-items: stretch;
+  min-height: 270px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.visual-copy {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 34px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.84));
+}
+
+.visual-copy p,
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--teal-dark);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.visual-copy h1 {
+  max-width: 620px;
+  margin: 0;
+  font-size: clamp(30px, 4vw, 54px);
+  line-height: 0.98;
+}
+
+.visual-band img {
+  width: 100%;
+  height: 100%;
+  min-height: 270px;
+  object-fit: cover;
+}
+
+.view {
+  display: none;
+  margin-top: 24px;
+}
+
+.view.active {
+  display: block;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  border-radius: 999px;
+  background: var(--soft-teal);
+  color: var(--teal-dark);
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.candidate-layout,
+.chat-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 1.1fr) minmax(300px, 0.9fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.profile-editor {
+  grid-template-columns: minmax(320px, 1fr) minmax(300px, 0.75fr);
+  align-items: start;
+}
+
+.job-card,
+.profile-panel,
+.applicant-card,
+.chat-panel,
+.match-list,
+.tracker-card,
+.editor-panel,
+.settings-panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 12px 32px rgba(25, 49, 66, 0.08);
+}
+
+.job-card {
+  overflow: hidden;
+}
+
+.job-cover {
+  display: grid;
+  gap: 18px;
+  min-height: 210px;
+  padding: 24px;
+  color: #fff;
+  background: var(--cover-image);
+  background-size: cover;
+  background-position: center;
+}
+
+.job-meta,
+.tracker-top,
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.company-mark {
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+}
+
+.tracker-card .company-mark {
+  background: var(--navy);
+  border: 0;
+}
+
+.job-title h3 {
+  margin: 20px 0 6px;
+  font-size: clamp(28px, 5vw, 46px);
+  line-height: 1;
+}
+
+.job-title p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.job-body,
+.profile-panel,
+.applicant-card,
+.tracker-card,
+.chat-panel,
+.editor-panel,
+.settings-panel {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+}
+
+.profile-panel h3,
+.profile-panel p,
+.resume-block p,
+.applicant-card p,
+.chat-panel p,
+.tracker-card p,
+.editor-panel h3,
+.tracker-card h3 {
+  margin: 0;
+}
+
+.profile-panel h3 {
+  font-size: 28px;
+}
+
+.tag-row,
+.profile-list,
+.skill-row,
+.document-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-row span,
+.profile-list span,
+.skill-row span,
+.document-strip span {
+  border-radius: 999px;
+  background: #eef3f1;
+  color: #395257;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.document-strip span {
+  background: #fff7df;
+  color: #5d4a13;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.detail-grid div,
+.resume-block,
+.score-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: #fbfcfa;
+}
+
+.detail-grid strong,
+.score-card strong {
+  display: block;
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+}
+
+.action-row,
+.applicant-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.primary-button,
+.secondary-button,
+.danger-button,
+.ghost-button {
+  min-height: 46px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0 16px;
+  font-weight: 800;
+}
+
+.primary-button {
+  background: var(--teal);
+  color: #fff;
+}
+
+.primary-button:hover {
+  background: var(--teal-dark);
+}
+
+.secondary-button {
+  background: var(--soft-coral);
+  color: #aa4137;
+  border-color: #ffd2cb;
+}
+
+.danger-button {
+  background: #fff;
+  color: #a8332c;
+  border-color: #f1c3bd;
+}
+
+.ghost-button {
+  background: #fff;
+  color: var(--navy);
+  border-color: var(--line);
+}
+
+.tracker-grid,
+.recruiter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.tracker-card.denied {
+  border-color: #f1c3bd;
+}
+
+.tracker-card.matched {
+  border-color: #a6dacf;
+}
+
+.form-grid,
+.upload-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.upload-box {
+  align-content: start;
+  min-height: 220px;
+  border: 1px dashed #bfd0cc;
+  border-radius: 8px;
+  padding: 14px;
+  background: #fbfcfa;
+}
+
+.upload-box input {
+  border: 0;
+  min-height: 36px;
+  padding: 0;
+}
+
+.photo-preview {
+  display: grid;
+  place-items: center;
+  width: 132px;
+  height: 132px;
+  border-radius: 8px;
+  background: var(--navy);
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  font-weight: 800;
+}
+
+.document-list {
+  display: grid;
+  gap: 10px;
+}
+
+.document-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+}
+
+.document-row strong,
+.document-row span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.ghost-link,
+.danger-link {
+  border: 0;
+  background: transparent;
+  color: var(--teal-dark);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.danger-link {
+  color: #a8332c;
+}
+
+.empty-small {
+  border: 1px dashed #bfd0cc;
+  border-radius: 8px;
+  color: var(--muted);
+  padding: 14px;
+}
+
+.toggle-row {
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
+.toggle-row input {
+  width: 18px;
+  min-height: 18px;
+}
+
+.match-list {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+}
+
+.match-button {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 12px;
+  text-align: left;
+}
+
+.match-button.active,
+.match-button:hover {
+  border-color: #98d8cf;
+  background: var(--soft-teal);
+}
+
+.chat-panel {
+  min-height: 360px;
+}
+
+.chat-thread {
+  display: grid;
+  gap: 10px;
+  margin: 4px 0;
+}
+
+.message {
+  max-width: 78%;
+  border-radius: 8px;
+  padding: 12px;
+  line-height: 1.4;
+}
+
+.message.recruiter {
+  justify-self: start;
+  background: #eef3f1;
+}
+
+.message.candidate {
+  justify-self: end;
+  background: var(--soft-teal);
+}
+
+.chat-compose {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.empty-state {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  border: 1px dashed #bfd0cc;
+  border-radius: 8px;
+  color: var(--muted);
+  text-align: center;
+  padding: 22px;
+}
+
+.empty-state h3,
+.empty-state p {
+  margin: 0;
+}
+
+.empty-state h3 {
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+
+@media (max-width: 1120px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+
+  .profile-compact,
+  .side-stat-grid {
+    display: none;
+  }
+
+  .mode-switch {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .mode-button {
+    text-align: center;
+  }
+
+  .visual-band,
+  .candidate-layout,
+  .chat-layout,
+  .profile-editor {
+    grid-template-columns: 1fr;
+  }
+
+  .visual-copy {
+    padding: 24px;
+  }
+
+  .visual-band img {
+    max-height: 300px;
+  }
+
+  .tracker-grid,
+  .recruiter-grid {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .auth-screen {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-visual {
+    min-height: 220px;
+  }
+
+  .auth-panel {
+    padding: 24px;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .workspace {
+    padding: 14px;
+  }
+
+  .visual-copy h1 {
+    font-size: 32px;
+  }
+
+  .section-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .segmented-control {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .detail-grid,
+  .tracker-grid,
+  .recruiter-grid,
+  .action-row,
+  .applicant-actions,
+  .demo-actions,
+  .form-grid,
+  .upload-grid,
+  .chat-compose,
+  .document-row {
+    grid-template-columns: 1fr;
+  }
+
+  .job-cover {
+    min-height: 180px;
+  }
+
+  .job-title h3 {
+    font-size: 32px;
+  }
+}

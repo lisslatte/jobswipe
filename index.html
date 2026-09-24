@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoleMate | Swipe Jobs, Match Recruiters</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section class="auth-screen" id="authScreen">
+      <div class="auth-visual">
+        <img
+          src="assets/hiring-marketplace.png"
+          alt="Hiring marketplace dashboard with job cards and candidate profiles"
+        />
+      </div>
+      <div class="auth-panel">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">RM</span>
+          <div>
+            <strong>RoleMate</strong>
+            <span>Swipe jobs. Match recruiters.</span>
+          </div>
+        </div>
+
+        <div class="auth-tabs" role="tablist" aria-label="Authentication">
+          <button class="auth-tab active" data-auth-mode="login" type="button">Login</button>
+          <button class="auth-tab" data-auth-mode="signup" type="button">Sign up</button>
+        </div>
+
+        <div class="role-tabs" role="tablist" aria-label="Account type">
+          <button class="role-tab active" data-auth-role="candidate" type="button">Job seeker</button>
+          <button class="role-tab" data-auth-role="hiring" type="button">Hiring manager</button>
+        </div>
+
+        <form class="auth-form" id="authForm">
+          <label>
+            <span>Name</span>
+            <input id="authName" autocomplete="name" placeholder="Nadia Amalia" />
+          </label>
+          <label>
+            <span>Email</span>
+            <input id="authEmail" type="email" autocomplete="email" placeholder="nadia@demo.com" required />
+          </label>
+          <label>
+            <span>Password</span>
+            <input id="authPassword" type="password" autocomplete="current-password" placeholder="demo123" required />
+          </label>
+          <button class="primary-button" id="authSubmit" type="submit">Login</button>
+          <p class="form-message" id="authMessage"></p>
+        </form>
+
+        <div class="demo-actions">
+          <button class="ghost-button" id="demoCandidateButton" type="button">Use demo job seeker</button>
+          <button class="ghost-button" id="demoHiringButton" type="button">Use demo hiring manager</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="app-shell hidden" id="appShell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">RM</span>
+          <div>
+            <strong>RoleMate</strong>
+            <span>Job matching workspace</span>
+          </div>
+        </div>
+
+        <nav class="mode-switch" aria-label="Workspace mode">
+          <button class="mode-button active" data-mode="discover" data-roles="candidate" type="button">Discover</button>
+          <button class="mode-button" data-mode="applications" data-roles="candidate" type="button">Applications</button>
+          <button class="mode-button" data-mode="profile" data-roles="candidate" type="button">Profile</button>
+          <button class="mode-button" data-mode="recruiter" data-roles="hiring" type="button">Recruiter</button>
+          <button class="mode-button" data-mode="chat" data-roles="candidate,hiring" type="button">Messages</button>
+          <button class="mode-button" data-mode="settings" data-roles="candidate" type="button">Settings</button>
+        </nav>
+
+        <section class="profile-compact">
+          <div class="avatar" id="sidebarAvatar">NA</div>
+          <div>
+            <strong id="sidebarName">Nadia Amalia</strong>
+            <span id="sidebarTitle">Product Designer</span>
+          </div>
+        </section>
+
+        <div class="side-stat-grid" aria-label="Application summary">
+          <div>
+            <strong id="appliedCount">0</strong>
+            <span id="primaryStatLabel">Applied</span>
+          </div>
+          <div>
+            <strong id="matchCount">0</strong>
+            <span id="secondaryStatLabel">Matches</span>
+          </div>
+        </div>
+
+        <button class="ghost-button" id="logoutButton" type="button">Logout</button>
+      </aside>
+
+      <main class="workspace">
+        <section class="visual-band">
+          <div class="visual-copy">
+            <p>Apply once. Match intentionally.</p>
+            <h1>Swipe through jobs that already know your profile.</h1>
+          </div>
+          <img
+            src="assets/hiring-marketplace.png"
+            alt="Hiring marketplace dashboard with job cards and candidate profiles"
+          />
+        </section>
+
+        <section class="view active" id="discoverView" aria-labelledby="discoverTitle">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Candidate deck</p>
+              <h2 id="discoverTitle">Filtered jobs for your search</h2>
+            </div>
+            <span class="status-pill" id="deckStatus">Ready</span>
+          </div>
+          <div class="candidate-layout">
+            <article class="job-card" id="jobCard"></article>
+            <aside class="profile-panel" id="profilePreview"></aside>
+          </div>
+        </section>
+
+        <section class="view" id="applicationsView" aria-labelledby="applicationsTitle">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Application tracker</p>
+              <h2 id="applicationsTitle">Applied, denied, matched, and waiting</h2>
+            </div>
+            <div class="segmented-control" id="applicationStatusFilter">
+              <button class="active" data-status-filter="all" type="button">All</button>
+              <button data-status-filter="pending" type="button">No answer</button>
+              <button data-status-filter="matched" type="button">Matched</button>
+              <button data-status-filter="denied" type="button">Denied</button>
+            </div>
+          </div>
+          <div class="tracker-grid" id="applicationTracker"></div>
+        </section>
+
+        <section class="view" id="profileView" aria-labelledby="profileTitle">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Job profile</p>
+              <h2 id="profileTitle">Edit profile, photo, and documents</h2>
+            </div>
+            <span class="status-pill" id="profileCompleteness">0% complete</span>
+          </div>
+          <form class="profile-editor" id="profileForm">
+            <section class="editor-panel">
+              <h3>Personal profile</h3>
+              <div class="form-grid">
+                <label>
+                  <span>Full name</span>
+                  <input name="name" required />
+                </label>
+                <label>
+                  <span>Current role</span>
+                  <input name="headline" required />
+                </label>
+                <label>
+                  <span>Location</span>
+                  <input name="location" required />
+                </label>
+                <label>
+                  <span>Experience</span>
+                  <input name="experience" required />
+                </label>
+                <label>
+                  <span>Portfolio link</span>
+                  <input name="portfolio" type="url" placeholder="https://..." />
+                </label>
+                <label>
+                  <span>Availability</span>
+                  <input name="availability" placeholder="Available in 30 days" />
+                </label>
+              </div>
+              <label>
+                <span>Summary</span>
+                <textarea name="summary" rows="4" required></textarea>
+              </label>
+              <label>
+                <span>Skills</span>
+                <input name="skills" placeholder="Figma, research, product strategy" />
+              </label>
+              <button class="primary-button" type="submit">Save profile</button>
+            </section>
+
+            <section class="editor-panel">
+              <h3>Uploads</h3>
+              <div class="upload-grid">
+                <label class="upload-box">
+                  <span>Profile photo</span>
+                  <input id="photoInput" type="file" accept="image/*" />
+                  <div class="photo-preview" id="photoPreview">Photo</div>
+                </label>
+                <label class="upload-box">
+                  <span>CV / resume document</span>
+                  <input id="documentInput" type="file" accept=".pdf,.doc,.docx,.txt,image/*" multiple />
+                  <div class="document-list" id="documentList"></div>
+                </label>
+              </div>
+            </section>
+          </form>
+        </section>
+
+        <section class="view" id="recruiterView" aria-labelledby="recruiterTitle">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Recruiter queue</p>
+              <h2 id="recruiterTitle">Candidates who swiped right</h2>
+            </div>
+            <select id="jobFilter" aria-label="Select open role"></select>
+          </div>
+          <div class="recruiter-grid" id="candidateQueue"></div>
+        </section>
+
+        <section class="view" id="chatView" aria-labelledby="chatTitle">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Matched conversations</p>
+              <h2 id="chatTitle">Chat opens only after both sides match</h2>
+            </div>
+            <span class="status-pill" id="chatStatus">No active match</span>
+          </div>
+          <div class="chat-layout">
+            <div class="match-list" id="matchList"></div>
+            <article class="chat-panel" id="chatPanel"></article>
+          </div>
+        </section>
+
+        <section class="view" id="settingsView" aria-labelledby="settingsTitle">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Job search settings</p>
+              <h2 id="settingsTitle">Adjust filters and preferences</h2>
+            </div>
+            <button class="secondary-button" id="resetDataButton" type="button">Reset demo data</button>
+          </div>
+          <form class="settings-panel" id="settingsForm">
+            <label>
+              <span>Search keyword</span>
+              <input name="keyword" placeholder="designer, product, research" />
+            </label>
+            <label>
+              <span>Location</span>
+              <select name="location">
+                <option value="any">Any location</option>
+                <option value="Jakarta">Jakarta</option>
+                <option value="Singapore">Singapore</option>
+                <option value="Remote">Remote</option>
+                <option value="APAC">APAC</option>
+              </select>
+            </label>
+            <label>
+              <span>Job type</span>
+              <select name="jobType">
+                <option value="any">Any type</option>
+                <option value="Full time">Full time</option>
+                <option value="Contract">Contract</option>
+                <option value="Contract to hire">Contract to hire</option>
+              </select>
+            </label>
+            <label>
+              <span>Minimum salary</span>
+              <input name="minSalary" type="number" min="0" step="1000" />
+            </label>
+            <label class="toggle-row">
+              <input name="remoteOnly" type="checkbox" />
+              <span>Remote-friendly jobs only</span>
+            </label>
+            <button class="primary-button" type="submit">Save filters</button>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
